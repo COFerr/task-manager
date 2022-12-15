@@ -1,0 +1,330 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+:root{
+    --mainPurple:#68519D;
+    --mainYellow:#F8B04E;
+    --secondaryPurple:#2C2661;
+    --lightPurple:#D7CAE5;
+    --lightYellow:#FBF0E2;
+}
+body{
+    font-size: 15px;
+    margin: 0px;    
+    padding: 0px;
+    font-family: 'Poppins';
+}
+
+.container{
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--lightPurple);
+}
+.purpleStripe{
+    width: 51px;
+    background-color: var(--mainPurple);
+    margin-right: 5px;
+    min-height: 100vh;
+}
+.content{
+    background-color: white;       
+    width: 76%;
+}
+
+.stripe{
+    width: 19%;
+    background-color: white;
+}
+
+.yellowStripe{
+    width: 15%;
+    min-height: 77%;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    clip-path: polygon(0 100%, 0 45%, 45% 0, 100% 0);
+    transform: rotate(180deg);
+    background-color: var(--mainYellow);    
+}
+
+.logo{
+    padding-top: 9%;
+    padding-left: 9%;
+    padding-bottom: 7%;
+    height: 8%;
+    width: 15%;
+}
+
+.tasksExibit{
+    display: flex;
+    margin-top: 5%;
+    margin-left: 10%;
+    gap: 5px;
+    
+}
+button{
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+p{
+    font-family: "Poppins";
+    color: var(--mainPurple);
+    
+}
+.title{
+    margin-left: 10%;
+    font-weight: 800;
+}
+
+.addTask{
+    color: white;
+    background-color: var(--mainPurple);
+    width: 225px;
+    height: 36px;
+    border: 1px solid var(--mainPurple);
+    border-radius: 20px;
+    margin-left: 10%;
+}
+.addTask:hover{
+    color: var(--mainPurple);
+    background-color: white;
+    cursor: pointer;
+}
+.tasksFilter{
+    color: var(--mainPurple);
+    background-color:white ;
+    width: 12%;
+    height: 36px;
+    border: 1px solid var(--mainPurple);
+    border-radius: 20px;
+    font-size: 12px;
+    transition: transform .3s;
+}
+.tasksFilter:hover{
+    color: white;
+    background-color: var(--mainPurple);
+    cursor: pointer;
+    transform: scale(1.1);
+}
+.tasksFilterInput{
+    width: 20%;
+    height: 36px;
+    padding-left: 5px;
+}
+.tasksResponsive{
+    display: none;
+    color: var(--mainPurple);
+    height: 50px;
+    width: 25%;
+    margin-left: 5%;
+    border: 1px solid var(--mainPurple);
+    border-radius: 20px;
+}
+table tr:nth-child(even){
+    background-color: #F5F5F5;
+}
+.table{
+    margin-left: 10%;
+    border-collapse: collapse;
+}
+.tableHead{
+    font-family: "Poppins";
+    color: var(--mainPurple);
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.table-secondary{
+    text-align: left;
+}
+#id{
+    width: 5%;
+}
+#description{
+    width: 30%;
+}
+#deadLine{
+    width: 25%;
+}
+#status{
+    width: 15%;
+}
+#action{
+    width: 5%;
+}
+tr{
+    text-align: left;
+    color: var(--mainPurple);
+}
+.actionIcons{
+    display: flex;
+    justify-content: space-around;
+}
+
+.previusNextButtons{
+    position: fixed;
+    bottom: 10px;
+    right: 19%;
+}
+#previus, #next{
+    font: 'Poppins';
+    color: var(--mainPurple);
+}
+.modal {
+    display: none;
+    text-align: left;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+.taskRegister{
+    margin: 5%;
+    color: var(--mainPurple);
+}
+
+.modal-container {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid gray;
+    width: 40%;
+}
+label{
+    color: var(--mainPurple);
+    margin-left: 5%;
+}
+input{
+    color: var(--mainPurple);
+    height: 50px;
+    width: 90%;
+    margin-left: 5%;
+    border: 1px solid var(--mainPurple);
+    border-radius: 20px;    
+}
+input:invalid{
+    outline: 1px solid red;
+}
+section{
+    margin-top: 5px;
+    margin-bottom: 7px;
+}
+
+#descriptionModal{
+    width: 90%;
+}
+#deadLineModal{
+    width: 40%;
+    text-align: center;
+}
+#statusModal{
+    width: 40%;
+}
+
+select{
+    margin-left: 5%;
+    width: 40%;
+}
+  
+.close {
+    color: gray;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+select{
+    height: 50px;
+    width: 20%;
+    border: 1px solid var(--mainPurple);
+    border-radius: 20px;
+    color: var(--mainPurple);
+}
+.saveTask{
+    border: 1px solid var(--mainPurple);
+    background-color: white;
+    color: var(--mainPurple);
+    border-radius: 20px;
+    width: 121px;
+    height: 36px;
+}
+.taskBar{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.cancel{
+    color: gray;
+    text-decoration: underline;
+    font-size: small;
+    cursor: pointer;
+}
+
+@media(max-width: 800px){
+    body{
+        font-size: 12px;
+    }
+    .table-status{
+        display: none;
+    }
+    table .taskStatus{
+        display: none;
+    }
+    .tasksExibit{
+        flex-wrap: wrap;       
+    }
+    .title{
+        margin-left: 0%;
+    }
+    .purpleStripe{
+        width: 41px;
+        margin-right: 4px;
+    }
+    .table{
+        margin-left: 0;
+        margin-top: 1%;
+    }
+
+    .tasksExibit{
+        margin-top: 5%;
+        margin-left: 0%;
+    }
+    .tasksFilter{
+        display: none;
+    }
+    .tasksResponsive{
+        display: block;
+    }
+    .tableHead{
+        margin: 0;
+    }
+    .logo{
+        padding: 1%;
+    } 
+    .stripe{
+        display: none;
+    }
+    .content{
+        width: 95%;
+
+    }
+    .table{
+        position: relative;
+        z-index: 1;
+    }
+    .contentYellowStripe{
+        width: 15%;
+        min-height: 77%;
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        clip-path: polygon(0 100%, 0 45%, 45% 0, 100% 0);
+        transform: rotate(180deg);
+        background-color: var(--mainYellow);
+        z-index: 0;
+    }
+}

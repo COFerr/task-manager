@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerenciador de Tarefas</title>
+  <link href="style.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body onload="getTasks()">
+  <div class="container">
+    <div class="purpleStripe"></div>
+    <div class="content">
+      <img src="logo_arnia.svg" class="logo" />
+      <p class="title"><img src="Vector.svg" class="vector" /> Gerenciador de Tarefas</p>
+      <button class="addTask" onclick="openModal()">+ Adicionar Tarefa</button>
+      <div class="tasksExibit">
+        <select class="tasksResponsive">
+          <optgroup>
+            <option value="Todas">Todas</option>
+            <option value="Em andamento">Em andamento</option>
+            <option value="Concluídas">Concluídas</option>
+            <option value="Pausadas">Pausadas</option>
+            <option value="Hoje">Hoje</option>
+            <option value="Atrasadas">Atrasadas</option>
+          </optgroup>
+        </select>
+        <button class="tasksResponsive" onclick="selectTasks()">Listar tarefas</button>
+        <button class="tasksFilter" onclick="choseTasks('all')">Todas</button>
+        <button class="tasksFilter" onclick="choseTasks('em_andamento')">Em andamento</button>
+        <button class="tasksFilter" onclick="choseTasks('concluido')">Concluídas</button>
+        <button class="tasksFilter" onclick="choseTasks('stopped')">Pausadas</button>
+        <button class="tasksFilter" onclick="expiresToday()">Hoje</button>
+        <button class="tasksFilter" onclick="getDelayedTasks()">Atrasadas</button>
+        <input type="text" class="tasksFilterInput" placeholder="pesquisar" onblur="search()"/>
+      </div>
+      <table class="table">
+        <thead class="tableHead">
+          <tr>
+            <th scope="col" class="table-secondary" id="num">Núm</th>
+            <th scope="col" class="table-secondary" id="description">Descrição</th>
+            <th scope="col" class="table-secondary" id="deadLine">Data de Entrega</th>
+            <th scope="col" class="table-secondary table-status" id="status">Status</th>
+            <th scope="col" class="table-secondary" id="action">Ação</th>
+          </tr>
+        </thead>
+        <tbody class="tableBody" id="tasks">
+        </tbody>
+      </table>
+      <div class = 'previusNextButtons'>
+        <button id="previus" onclick="previusPage()">anterior</button>
+        <button id="next" onclick="nextPage()">proxima</button>          
+      </div>
+      <div class="contentYellowStripe"></div>
+      <div id="modal" class="modal">
+        <div class="modal-container">
+          <div class="modal-content">
+            <form id="newTask" class="form-card">
+              <section>
+                <h1 class="taskRegister">Adicionar nova Tarefa</h1>
+              </section>
+              <section>
+                <label for="number">Número</label><br />
+                <input id="number" type="number" name="number" class="input input-default" required />
+              </section>
+              <section>
+                <label for="description">Descrição</label><br />
+                <input id="descriptionModal" name="description" class="input input-default" required />
+              </section>
+              <section>
+                <label for="deadLine">Data</label><br />
+                <input id="deadLineModal" name="deadLine" type="date" class="input input-default" required />
+              </section>
+              <section>
+                <label for="status">Status</label><br />
+                <select name="status" id="statusModal" class="input input-default" required>
+                  <optgroup>
+                    <option disabled>Status do projeto</option>
+                    <option value="concluido">Concluído</option>
+                    <option value="em_andamento">Em andamento</option>
+                    <option value="stopped">Stopped</option>
+                  </optgroup>
+                </select>
+              </section>
+              <div class="taskBar">
+                <div onclick="closeModal()" class="cancel">cancelar</div>
+                <div><button type="submit" class="saveTask" id="saveTask">SALVAR</button></div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="stripe">
+      <div class="yellowStripe"></div>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+
+</html>
