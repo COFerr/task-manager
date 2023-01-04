@@ -371,6 +371,7 @@ const renderTasks = (tasks) => {
     if(isResponsiveStatus) showResponsiveStatus(document.querySelector('.showResponsiveStatus'))
 }
 function search() {
+    page = 1
     const task = document.getElementsByClassName('tasksFilterInput')[0].value
     filterAtribute = task
     getTasks()
