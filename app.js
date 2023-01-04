@@ -292,7 +292,7 @@ function changeColors() {
 }
 
 const saveTask = async (task) => {
-    await fetch("http://localhost:3000/posts", {
+    await fetch("https://json-server-vercel-lyart.vercel.app/posts", {
         method: "POST",
         headers: {
             'Accept': 'application/json, text/plain, */*',
@@ -328,7 +328,7 @@ if (form) {
 }
 
 const validateForm = async (task) => {
-    const apiResponse = await fetch('http://localhost:3000/posts?_sort=id&_order=desc')
+    const apiResponse = await fetch('https://json-server-vercel-lyart.vercel.app/posts?_sort=id&_order=desc')
     tasks = await apiResponse.json()
     for (let i = 0; i < tasks.length; i++) {
         if (task.number === tasks[i].number) {
@@ -412,7 +412,7 @@ const getDelayedTasks = async () => {
     if(!isDelayed) page = 1
     isAtodayTask = false
     isDelayed = true
-    const apiResponse = await fetch(`http://localhost:3000/posts?_sort=${sort}&_order=${order}`)
+    const apiResponse = await fetch(`https://json-server-vercel-lyart.vercel.app/posts?_sort=${sort}&_order=${order}`)
     let tasks = await apiResponse.json()
     const now = new Date()
     tasks = tasks.filter(function (element) {
@@ -441,8 +441,8 @@ const getTasks = async () => {
     if(isAtodayTask) page = 1
     else if(isDelayed) page = 1
     isDelayed = false
-    isAtodayTask = false
-    let link = `http://localhost:3000/posts?_page=${page}&_limit=${tasksPerPage}`
+    let tasks = ''
+    let link = `http://localhost:3000/posts?_page=${page}&_limit=10`
     if (filterAtribute === 'all') {
         document.querySelector('.previusNextButtons').style.display = 'block';
         const apiResponse = await fetch(`${link}&_sort=${sort}&_order=${order}`)
@@ -463,9 +463,8 @@ const getTasks = async () => {
         const apiResponse = await fetch(`${link}&status=Parada&_sort=${sort}&_order=${order}`)
         tasks = await apiResponse.json()
     }
-    else {
-        //document.querySelector('.previusNextButtons').style.display = 'none';
-        const apiResponse = await fetch(`http://localhost:3000/posts?_sort=${sort}&_order=${order}`)
+    else{
+        const apiResponse = await fetch(`http://localhost:3000/posts?_sort=number&_order=asc`)
         tasks = await apiResponse.json()
         tasks = tasks.filter(function (element) {
             deadLine = element.deadLine.split('-')
@@ -501,7 +500,7 @@ function previusPage() {
 }
 
 const getTask = async (id) => {
-    const apiResponse = await fetch(`http://localhost:3000/posts/${id}`)
+    const apiResponse = await fetch(`https://json-server-vercel-lyart.vercel.app/posts/${id}`)
     const task = await apiResponse.json()
     return task
 }
@@ -519,8 +518,8 @@ const editTask = async (id) => {
 
 const deleteTask = async (id) => {
     task = await getTask(id)
-    if (confirm(`Deseja apagar a tarefa ${task.number}?`)) {
-        await fetch(`http://localhost:3000/posts/${id}`, {
+    if (confirm(`Deseja apagar a tarefa ${task.number}`)) {
+        await fetch(`https://json-server-vercel-lyart.vercel.app/posts/${id}`, {
             method: 'DELETE'
         })
         filterAtribute = 'all'
@@ -529,7 +528,7 @@ const deleteTask = async (id) => {
 }
 
 const updateTask = async (id, task) => {
-    await fetch(`http://localhost:3000/posts/${id}`, {
+    await fetch(`https://json-server-vercel-lyart.vercel.app/posts/${id}`, {
         method: "PUT",
         headers: {
             'Accept': 'application/json, text/plain, */*',
