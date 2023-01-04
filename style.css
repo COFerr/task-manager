@@ -78,7 +78,7 @@ body{
 }
 .content{
     background-color: white;      
-    width: 76%;
+    min-width: 76%;
 }
 
 .stripe{
