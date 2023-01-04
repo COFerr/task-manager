@@ -395,9 +395,7 @@ async function choseTasks(filterWord) {
     getTasks()
 }
 function expiresToday() {
-    if(!isAtodayTask) page = 1
-    isAtodayTask = true
-    isDelayed = false
+    page = 1
     now = new Date()
     let year = now.getFullYear()
     let month = now.getMonth()+1
@@ -409,9 +407,7 @@ function expiresToday() {
 
 const getDelayedTasks = async () => {
     //document.querySelector('.previusNextButtons').style.display = 'none';
-    if(!isDelayed) page = 1
-    isAtodayTask = false
-    isDelayed = true
+    page = 1
     const apiResponse = await fetch(`https://json-server-vercel-lyart.vercel.app/posts?_sort=${sort}&_order=${order}`)
     let tasks = await apiResponse.json()
     const now = new Date()
@@ -438,9 +434,7 @@ const getDelayedTasks = async () => {
 }
 
 const getTasks = async () => {
-    if(isDelayed) page = 1
     isDelayed = false
-    isAtodayTask = false
     let tasks = ''
     let link = `https://json-server-vercel-lyart.vercel.app/posts?_page=${page}&_limit=10`
     if (filterAtribute === 'all') {
