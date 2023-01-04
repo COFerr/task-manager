@@ -407,7 +407,7 @@ function expiresToday() {
 
 const getDelayedTasks = async () => {
     //document.querySelector('.previusNextButtons').style.display = 'none';
-    page = 1
+    if(!isDelayed) page = 1
     isDelayed = true
     const apiResponse = await fetch(`https://json-server-vercel-lyart.vercel.app/posts?_sort=${sort}&_order=${order}`)
     let tasks = await apiResponse.json()
