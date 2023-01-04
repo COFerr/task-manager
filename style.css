@@ -498,7 +498,7 @@ select{
         display: none;
     }
     .content{
-        width: 95%;
+        min-width: 95%;
 
     }
     .table{
