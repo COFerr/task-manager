@@ -65,7 +65,7 @@ body{
 }
 .container{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     background-color: var(--lightPurple);
 }
 .purpleStripe{
