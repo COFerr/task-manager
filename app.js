@@ -438,9 +438,9 @@ const getDelayedTasks = async () => {
 }
 
 const getTasks = async () => {
-    if(isAtodayTask) page = 1
-    else if(isDelayed) page = 1
+    if(isDelayed) page = 1
     isDelayed = false
+    isAtodayTask = false
     let tasks = ''
     let link = `https://json-server-vercel-lyart.vercel.app/posts?_page=${page}&_limit=10`
     if (filterAtribute === 'all') {
