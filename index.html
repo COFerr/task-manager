@@ -7,52 +7,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gerenciador de Tarefas</title>
   <link href="style.css" type="text/css" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/b3d1ba0a2a.js" crossorigin="anonymous"></script>
 </head>
 
-<body onload="getTasks()">
+<body>
+  <div id="registerModal" class="registerModal">
+    <div class="register-modal-container">
+      <div class="register-modal-content">
+        <form id="user" class="form-card">
+          <section>
+            <h1>Gerenciador de Tarefas Arnia</h1>
+            <h2 class="taskRegister"><i class="fa-solid fa-user"></i> Login</h1>
+          </section>
+          <section>
+            <label for="userName">Nome de usuário</label><br />
+            <input id="userName" name="userName" class="input input-default" minlength="1" required />
+          </section>
+          <section>
+            <label for="password">Senha (mínimo 6 caracteres)</label><br />
+            <input type="password" id="password" name="password" class="input input-default" minlength="4" required />
+          </section>
+          <div class="taskBar">
+            <div onclick="newRegister()" class="newRegister">cadastrar</div>
+            <div><button type="submit" class="register" id="register">Login</button></div>
+          </div>
+          <section class="registerFootBar">
+            <img src="logo_Arnia_sem_fundo.png" class='registerLogo'>
+          </section>
+        </form>
+      </div>
+    </div>
+  </div>
   <div class="container">
     <div class="purpleStripe"></div>
     <div class="content">
       <img src="logo_arnia.svg" class="logo" />
-      <p class="title"><img src="Vector.svg" class="vector" /> Gerenciador de Tarefas</p>
-      <button class="addTask" onclick="openModal()">+ Adicionar Tarefa</button>
-      <div class="tasksExibit">
-        <select class="tasksResponsive">
-          <optgroup>
-            <option value="Todas">Todas</option>
-            <option value="Em andamento">Em andamento</option>
-            <option value="Concluídas">Concluídas</option>
-            <option value="Pausadas">Pausadas</option>
-            <option value="Hoje">Hoje</option>
-            <option value="Atrasadas">Atrasadas</option>
-          </optgroup>
-        </select>
-        <button class="tasksResponsive" onclick="selectTasks()">Listar tarefas</button>
-        <button class="tasksFilter" onclick="choseTasks('all')">Todas</button>
-        <button class="tasksFilter" onclick="choseTasks('em_andamento')">Em andamento</button>
-        <button class="tasksFilter" onclick="choseTasks('concluido')">Concluídas</button>
-        <button class="tasksFilter" onclick="choseTasks('stopped')">Pausadas</button>
-        <button class="tasksFilter" onclick="expiresToday()">Hoje</button>
-        <button class="tasksFilter" onclick="getDelayedTasks()">Atrasadas</button>
-        <input type="text" class="tasksFilterInput" placeholder="pesquisar" onblur="search()"/>
+      <div class="title"><img class="checkLogo" src="managerIconBlue.svg"/> <p> Gerenciador de Tarefas</p></div>
+      <div class = 'options'>        
       </div>
-      <table class="table">
-        <thead class="tableHead">
-          <tr>
-            <th scope="col" class="table-secondary" id="num">Núm</th>
-            <th scope="col" class="table-secondary" id="description">Descrição</th>
-            <th scope="col" class="table-secondary" id="deadLine">Data de Entrega</th>
-            <th scope="col" class="table-secondary table-status" id="status">Status</th>
-            <th scope="col" class="table-secondary" id="action">Ação</th>
-          </tr>
-        </thead>
-        <tbody class="tableBody" id="tasks">
-        </tbody>
+      <div class="tasksExibit">        
+      </div>
+      <table class="table">        
       </table>
-      <div class = 'previusNextButtons'>
-        <button id="previus" onclick="previusPage()">anterior</button>
-        <button id="next" onclick="nextPage()">proxima</button>          
+      <div class = 'previusNextButtons'>        
       </div>
+      <div id="bottom content"></div>
       <div class="contentYellowStripe"></div>
       <div id="modal" class="modal">
         <div class="modal-container">
@@ -79,8 +78,8 @@
                   <optgroup>
                     <option disabled>Status do projeto</option>
                     <option value="concluido">Concluído</option>
-                    <option value="em_andamento">Em andamento</option>
-                    <option value="stopped">Stopped</option>
+                    <option value="Em andamento">Em andamento</option>
+                    <option value="Parada">Parada</option>
                   </optgroup>
                 </select>
               </section>
@@ -98,6 +97,7 @@
     </div>
   </div>
   <script src="app.js"></script>
+  <script src="https://kit.fontawesome.com/b3d1ba0a2a.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

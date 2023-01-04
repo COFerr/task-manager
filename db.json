@@ -74,14 +74,14 @@
       "number": 11,
       "description": "teste 56",
       "deadLine": "2022-11-19",
-      "status": "Parada",
+      "status": "stopped",
       "id": 11
     },
     {
       "number": 12,
       "description": "teste 57",
       "deadLine": "2021-12-13",
-      "status": "Parada",
+      "status": "stopped",
       "id": 12
     },
     {
@@ -116,10 +116,12 @@
       "number": 17,
       "description": "teste 72",
       "deadLine": "2022-12-15",
-      "status": "Parada",
+      "status": "stopped",
       "id": 17
     }
   ],
   "comments": [],
-  "profile": []
+  "profile": {
+    "name": "typicode"
+  }
 }
