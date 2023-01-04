@@ -18,7 +18,7 @@ async function newRegister() {
     const userName = user.elements['userName'].value
     const password = user.elements['password'].value
     if (userName !== '' && password.length >= 6) {
-        const apiResponse = await fetch('http://localhost:3000/profile')
+        const apiResponse = await fetch('https://json-server-vercel-lyart.vercel.app/profile')
         profile = await apiResponse.json()
         profile = profile.filter(function (element) {
             return (userName === element.userName)
@@ -38,7 +38,7 @@ async function newRegister() {
     else alert("Usuário não pode estar em branco/A senha deve possuir pelo menos 6 caracteres")
 }
 const saveNewUser = async (user) => {
-    await fetch("http://localhost:3000/profile", {
+    await fetch("https://json-server-vercel-lyart.vercel.app/profile", {
         method: "POST",
         headers: {
             'Accept': 'application/json, text/plain, */*',
@@ -51,7 +51,7 @@ const saveNewUser = async (user) => {
     });
 }
 const register = async (userData) => {
-    const apiResponse = await fetch('http://localhost:3000/profile?_sort=id&_order=desc')
+    const apiResponse = await fetch('https://json-server-vercel-lyart.vercel.app/profile?_sort=id&_order=desc')
     profile = await apiResponse.json()
     for (let i = 0; i < profile.length; i++) {
         if (profile[i].userName === userData.userName && profile[i].password === userData.password) {
@@ -442,7 +442,7 @@ const getTasks = async () => {
     else if(isDelayed) page = 1
     isDelayed = false
     let tasks = ''
-    let link = `http://localhost:3000/posts?_page=${page}&_limit=10`
+    let link = `https://json-server-vercel-lyart.vercel.app/posts?_page=${page}&_limit=10`
     if (filterAtribute === 'all') {
         document.querySelector('.previusNextButtons').style.display = 'block';
         const apiResponse = await fetch(`${link}&_sort=${sort}&_order=${order}`)
@@ -464,7 +464,7 @@ const getTasks = async () => {
         tasks = await apiResponse.json()
     }
     else{
-        const apiResponse = await fetch(`http://localhost:3000/posts?_sort=number&_order=asc`)
+        const apiResponse = await fetch(`https://json-server-vercel-lyart.vercel.app/posts?_sort=number&_order=asc`)
         tasks = await apiResponse.json()
         tasks = tasks.filter(function (element) {
             deadLine = element.deadLine.split('-')
