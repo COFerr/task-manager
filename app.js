@@ -14,7 +14,6 @@ const tasksPerPage = 10
 
 async function newRegister() {
     let registerModal = document.getElementsByClassName("registerModal")[0]
-    //registerModal.style.display = 'none'; 
     const userName = user.elements['userName'].value
     const password = user.elements['password'].value
     if (userName !== '' && password.length >= 6) {
@@ -502,13 +501,11 @@ const getTask = async (id) => {
 
 const editTask = async (id) => {
     task = await getTask(id)
-    console.log(task)
     document.getElementById('number').value = task.number
     document.getElementById('descriptionModal').value = task.description
     document.getElementById('deadLineModal').value = task.deadLine
     document.getElementById('statusModal').value = task.status
     openModal()
-    console.log(`função '${id}' editada`)
 }
 
 const deleteTask = async (id) => {

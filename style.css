@@ -202,10 +202,17 @@ table tr:nth-child(even){
 table tr:nth-child(2n-1){
     color: var(--tableColor);
 }
-.table{
+.div-table{
     width: 92%;
     margin-left: 10%;
     margin-bottom: 100px;
+    border-collapse: collapse;
+    box-sizing: border-box;    
+}
+.table{
+    width: 100%;
+    /*margin-left: 10%;
+    margin-bottom: 100px;*/
     border-collapse: collapse;
     box-sizing: border-box;
 }
