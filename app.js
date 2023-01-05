@@ -17,7 +17,7 @@ async function newRegister() {
     const userName = user.elements['userName'].value
     const password = user.elements['password'].value
     if (userName !== '' && password.length >= 6) {
-        const apiResponse = await fetch('json-server-vercel-lg6cj1nhr-coferr.vercel.appprofile')
+        const apiResponse = await fetch('json-server-vercel-lg6cj1nhr-coferr.vercel.app/profile')
         profile = await apiResponse.json()
         profile = profile.filter(function (element) {
             return (userName === element.userName)
@@ -37,7 +37,7 @@ async function newRegister() {
     else alert("Usuário não pode estar em branco/A senha deve possuir pelo menos 6 caracteres")
 }
 const saveNewUser = async (user) => {
-    await fetch("json-server-vercel-lg6cj1nhr-coferr.vercel.appprofile", {
+    await fetch("json-server-vercel-lg6cj1nhr-coferr.vercel.app/profile", {
         method: "POST",
         headers: {
             'Accept': 'application/json, text/plain, */*',
@@ -50,7 +50,7 @@ const saveNewUser = async (user) => {
     });
 }
 const register = async (userData) => {
-    const apiResponse = await fetch('json-server-vercel-lg6cj1nhr-coferr.vercel.appprofile?_sort=id&_order=desc')
+    const apiResponse = await fetch('json-server-vercel-lg6cj1nhr-coferr.vercel.app/profile?_sort=id&_order=desc')
     profile = await apiResponse.json()
     for (let i = 0; i < profile.length; i++) {
         if (profile[i].userName === userData.userName && profile[i].password === userData.password) {
@@ -291,7 +291,7 @@ function changeColors() {
 }
 
 const saveTask = async (task) => {
-    await fetch("json-server-vercel-lg6cj1nhr-coferr.vercel.appposts", {
+    await fetch("json-server-vercel-lg6cj1nhr-coferr.vercel.app/posts", {
         method: "POST",
         headers: {
             'Accept': 'application/json, text/plain, */*',
@@ -327,7 +327,7 @@ if (form) {
 }
 
 const validateForm = async (task) => {
-    const apiResponse = await fetch('json-server-vercel-lg6cj1nhr-coferr.vercel.appposts?_sort=id&_order=desc')
+    const apiResponse = await fetch('json-server-vercel-lg6cj1nhr-coferr.vercel.app/posts?_sort=id&_order=desc')
     tasks = await apiResponse.json()
     for (let i = 0; i < tasks.length; i++) {
         if (task.number === tasks[i].number) {
@@ -408,7 +408,7 @@ function expiresToday() {
 const getDelayedTasks = async () => {
     if(!isDelayed) page = 1
     isDelayed = true
-    const apiResponse = await fetch(`json-server-vercel-lg6cj1nhr-coferr.vercel.appposts?_sort=${sort}&_order=${order}`)
+    const apiResponse = await fetch(`json-server-vercel-lg6cj1nhr-coferr.vercel.app/posts?_sort=${sort}&_order=${order}`)
     let tasks = await apiResponse.json()
     const now = new Date()
     tasks = tasks.filter(function (element) {
@@ -436,7 +436,7 @@ const getDelayedTasks = async () => {
 const getTasks = async () => {
     isDelayed = false
     let tasks = ''
-    let link = `json-server-vercel-lg6cj1nhr-coferr.vercel.appposts?_page=${page}&_limit=10`
+    let link = `json-server-vercel-lg6cj1nhr-coferr.vercel.app/posts?_page=${page}&_limit=10`
     if (filterAtribute === 'all') {
         document.querySelector('.previusNextButtons').style.display = 'block';
         const apiResponse = await fetch(`${link}&_sort=${sort}&_order=${order}`)
@@ -458,7 +458,7 @@ const getTasks = async () => {
         tasks = await apiResponse.json()
     }
     else{
-        const apiResponse = await fetch(`json-server-vercel-lg6cj1nhr-coferr.vercel.appposts?_sort=number&_order=asc`)
+        const apiResponse = await fetch(`json-server-vercel-lg6cj1nhr-coferr.vercel.app/posts?_sort=number&_order=asc`)
         tasks = await apiResponse.json()
         tasks = tasks.filter(function (element) {
             deadLine = element.deadLine.split('-')
@@ -494,7 +494,7 @@ function previusPage() {
 }
 
 const getTask = async (id) => {
-    const apiResponse = await fetch(`json-server-vercel-lg6cj1nhr-coferr.vercel.appposts/${id}`)
+    const apiResponse = await fetch(`json-server-vercel-lg6cj1nhr-coferr.vercel.app/posts/${id}`)
     const task = await apiResponse.json()
     return task
 }
@@ -511,7 +511,7 @@ const editTask = async (id) => {
 const deleteTask = async (id) => {
     task = await getTask(id)
     if (confirm(`Deseja apagar a tarefa ${task.number}`)) {
-        await fetch(`json-server-vercel-lg6cj1nhr-coferr.vercel.appposts/${id}`, {
+        await fetch(`json-server-vercel-lg6cj1nhr-coferr.vercel.app/posts/${id}`, {
             method: 'DELETE'
         })
         filterAtribute = 'all'
@@ -520,7 +520,7 @@ const deleteTask = async (id) => {
 }
 
 const updateTask = async (id, task) => {
-    await fetch(`json-server-vercel-lg6cj1nhr-coferr.vercel.appposts/${id}`, {
+    await fetch(`json-server-vercel-lg6cj1nhr-coferr.vercel.app/posts/${id}`, {
         method: "PUT",
         headers: {
             'Accept': 'application/json, text/plain, */*',
