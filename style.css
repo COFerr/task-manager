@@ -193,8 +193,7 @@ p{
 }
 .tasksFilterInput{
     width: 20%;
-    height: 36px;
-    padding-left: 5px;
+    height: 26px;
 }
 table tr:nth-child(even){
     background-color: #F5F5F5;
