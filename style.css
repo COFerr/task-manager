@@ -35,6 +35,9 @@ body{
     width: 40%;
     border-radius: 50px;
 }
+input{
+    margin-left: 10px;
+}
 .registerFootBar{
     background-color: var(--mainPurple);
     height: 40px;

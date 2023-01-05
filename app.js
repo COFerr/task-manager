@@ -458,7 +458,7 @@ const getTasks = async () => {
         tasks = await apiResponse.json()
     }
     else{
-        const apiResponse = await fetch(`https://json-server-vercel-lyart.vercel.app/posts?_sort=number&_order=asc`)
+        const apiResponse = await fetch(`https://json-server-vercel-lyart.vercel.app/posts?_sort=${sort}&_order=${order}`)
         tasks = await apiResponse.json()
         tasks = tasks.filter(function (element) {
             deadLine = element.deadLine.split('-')
