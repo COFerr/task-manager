@@ -320,9 +320,11 @@ tr{
     height: 1px;
 }
 .nothingToShow{
-    position: fixed;
+    position: relative;
     text-align: left;
-    padding: 10%;
+    left: auto;
+    right: auto;
+    padding-top: 10%;
     display: none;
     left: auto;    
 }
