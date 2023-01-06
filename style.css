@@ -352,14 +352,12 @@ tr{
 }
 label{
     color: var(--mainPurple);
-    margin-left: 5%;
 }
 input{
     padding: 10px;
     color: var(--mainPurple);
     height: 50px;
     width: 90%;
-    margin-left: 5%;
     border: 1px solid var(--mainPurple);
     border-radius: 30px;    
 }
@@ -383,7 +381,6 @@ section{
 }
 
 select{
-    margin-left: 5%;
     width: 40%;
 }
   
