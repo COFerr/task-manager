@@ -480,6 +480,9 @@ select{
         width: 41px;
         margin-right: 4px;
     }
+    .div-table{
+        margin-left: 0%;
+    }
     .table{
         margin-left: 0;
         margin-top: 1%;
