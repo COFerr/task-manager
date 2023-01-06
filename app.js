@@ -145,9 +145,6 @@ function renderTable() {
   </thead>
   <tbody class="tableBody" id="tasks">
   </tbody>
-  <div class="nothingToShow">
-    <h2 class="no_tasks">Sem tarefas a exibir</h2>
-  </div>
   `
 }
 
