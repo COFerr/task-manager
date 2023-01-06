@@ -321,12 +321,10 @@ tr{
 }
 .nothingToShow{
     position: relative;
-    text-align: left;
-    left: auto;
-    right: auto;
+    width: 200px;
+    left: 30%;
     padding-top: 10%;
-    display: none;
-    left: auto;    
+    display: none; 
 }
 .modal {
     display: none;
