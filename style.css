@@ -321,8 +321,7 @@ tr{
 }
 .nothingToShow{
     position: relative;
-    width: 200px;
-    left: 30%;
+    left: 40%;
     padding-top: 10%;
     display: none; 
 }
