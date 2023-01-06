@@ -322,7 +322,7 @@ tr{
 .nothingToShow{
     position: relative;
     left: 40%;
-    padding-top: 10%;
+    padding-top: 5%;
     display: none; 
 }
 .modal {
