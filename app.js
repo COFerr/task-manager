@@ -102,8 +102,8 @@ function renderTable() {
         <div class="th-display">
           <div>Núm</div>
           <div class="th-buttons">
-            <button onclick="ordenateTasks('number','desc')" id="orderButton"><i class="fa-solid fa-circle-chevron-up"></i></button>
-            <button onclick="ordenateTasks('number',  'asc')" id="orderButton"><i class="fa-solid fa-circle-chevron-down"></i></button>
+            <button onclick="ordenateTasks('number','desc')" id="orderButton"><i class="fa-solid fa-sort-up"></i></button>
+            <button onclick="ordenateTasks('number',  'asc')" id="orderButton"><i class="fa-solid fa-sort-down"></i></button>
           </div>
         </div>
       </th>
@@ -111,8 +111,8 @@ function renderTable() {
         <div class="th-display">
             <div>Descrição</div>
             <div class="th-buttons">
-                <button onclick="ordenateTasks('description', 'desc')" id="orderButton"><i class="fa-solid fa-circle-chevron-up"></i></button>
-                <button onclick="ordenateTasks('description', 'asc')" id="orderButton"><i class="fa-solid fa-circle-chevron-down"></i></button>
+                <button onclick="ordenateTasks('description', 'desc')" id="orderButton"><i class="fa-solid fa-sort-up"></i></button>
+                <button onclick="ordenateTasks('description', 'asc')" id="orderButton"><i class="fa-solid fa-sort-down"></i></button>
             </div>
             <div class="th-responsive-buttons">
                 <button class='showResponsiveDeadLine' onclick="showResponsiveDeadLine(this)"><i class="fa-solid fa-circle-plus"></i></button>
@@ -126,8 +126,8 @@ function renderTable() {
         <div class="th-display">
           <div>Data de Entrega</div>
           <div class="th-buttons">
-            <button onclick="ordenateTasks('deadLine', 'desc')" id="orderButton"><i class="fa-solid fa-circle-chevron-up"></i></button>
-            <button onclick="ordenateTasks('deadLine', 'asc')" id="orderButton"><i class="fa-solid fa-circle-chevron-down"></i></button>
+            <button onclick="ordenateTasks('deadLine', 'desc')" id="orderButton"><i class="fa-solid fa-sort-up"></i></button>
+            <button onclick="ordenateTasks('deadLine', 'asc')" id="orderButton"><i class="fa-solid fa-sort-down"></i></button>
           </div>
         </div>
       </th>
@@ -135,8 +135,8 @@ function renderTable() {
         <div class="th-display">
           <div>Status</div>
           <div class="th-buttons">
-            <button onclick="ordenateTasks('status', 'desc')" id="orderButton"><i class="fa-solid fa-circle-chevron-up"></i></button>
-            <button onclick="ordenateTasks('status', 'asc')" id="orderButton"><i class="fa-solid fa-circle-chevron-down"></i></button>
+            <button onclick="ordenateTasks('status', 'desc')" id="orderButton"><i class="fa-solid fa-sort-up"></i></button>
+            <button onclick="ordenateTasks('status', 'asc')" id="orderButton"><i class="fa-solid fa-sort-down"></i></button>
           </div>
         </div>
       </th>
