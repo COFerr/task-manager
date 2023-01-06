@@ -115,10 +115,10 @@ function renderTable() {
                 <button onclick="ordenateTasks('description', 'asc')" id="orderButton"><i class="fa-solid fa-sort-down"></i></button>
             </div>
             <div class="th-responsive-buttons">
-                <button class='showResponsiveDeadLine' onclick="showResponsiveDeadLine(this)"><i class="fa-solid fa-circle-plus"></i></button>
-                <button class='unshowResponsiveDeadLine' onclick="unshowResponsiveDeadLine(this)"><i class="fa-solid fa-circle-minus"></i></button>
-                <button class ='showResponsiveStatus' onclick="showResponsiveStatus(this)"><i class="fa-solid fa-circle-plus"></i></button>
-                <button class ='unshowResponsiveStatus' onclick="unshowResponsiveStatus(this)"><i class="fa-solid fa-circle-minus"></i></button>
+                <button class='showResponsiveDeadLine' onclick="showResponsiveDeadLine(this)"><i class="fa-solid fa-circle-plus fa-lg"></i></button>
+                <button class='unshowResponsiveDeadLine' onclick="unshowResponsiveDeadLine(this)"><i class="fa-solid fa-circle-minus fa-lg"></i></button>
+                <button class ='showResponsiveStatus' onclick="showResponsiveStatus(this)"><i class="fa-solid fa-circle-plus fa-lg"></i></button>
+                <button class ='unshowResponsiveStatus' onclick="unshowResponsiveStatus(this)"><i class="fa-solid fa-circle-minus fa-lg"></i></button>
             </div>
         </div>
       </th>
