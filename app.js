@@ -11,6 +11,7 @@ let isDelayed = false
 let isAtodayTask = false
 let page = 1
 const tasksPerPage = 10
+currentUser = ''
 
 async function newRegister() {
     let registerModal = document.getElementsByClassName("registerModal")[0]
@@ -55,6 +56,10 @@ const register = async (userData) => {
     for (let i = 0; i < profile.length; i++) {
         if (profile[i].userName === userData.userName && profile[i].password === userData.password) {
             registerModal.style.display = 'none';
+            currentUser = {
+                userName: userData.userName,
+                password: userData.password
+            }
             renderPage()
             getTasks()
             return null
@@ -173,13 +178,13 @@ if (user) {
 }
 
 function showResponsiveStatus(btn) {
-    if(btn === "") btn = document.querySelector(".showResponsiveStatus")
+    if (btn === "") btn = document.querySelector(".showResponsiveStatus")
     isResponsiveStatus = true
     let bodyStatus = document.querySelectorAll('.taskStatus')
     let headStatus = document.querySelector('.table-status')
     let showBtn = document.querySelector('.unshowResponsiveStatus')
     headStatus.classList.remove('noShowResponsive')
-    for(let i=0;i< bodyStatus.length; i++){
+    for (let i = 0; i < bodyStatus.length; i++) {
         bodyStatus[i].classList.remove('noShowResponsive')
     }
     showBtn.style.display = "inline"
@@ -192,7 +197,7 @@ function unshowResponsiveStatus(btn) {
     let headStatus = document.querySelector('.table-status')
     let showBtn = document.querySelector('.showResponsiveStatus')
     headStatus.classList.add('noShowResponsive')
-    for(let i=0;i< bodyStatus.length; i++){
+    for (let i = 0; i < bodyStatus.length; i++) {
         bodyStatus[i].classList.add('noShowResponsive')
     }
     showBtn.style.display = "inline"
@@ -201,12 +206,12 @@ function unshowResponsiveStatus(btn) {
 
 function showResponsiveDeadLine(btn) {
     isResponsiveDeadline = true
-    if(btn === "") btn = document.querySelector('.showResponsiveDeadLine')
+    if (btn === "") btn = document.querySelector('.showResponsiveDeadLine')
     let bodyStatus = document.querySelectorAll('.table-deadLine')
     let headDeadline = document.querySelector('#deadLine')
     let showBtn = document.querySelector('.unshowResponsiveDeadLine')
     headDeadline.classList.remove('noShowResponsive')
-    for(let i=0;i< bodyStatus.length; i++){
+    for (let i = 0; i < bodyStatus.length; i++) {
         bodyStatus[i].classList.remove('noShowResponsive')
     }
     showBtn.style.display = "inline"
@@ -218,7 +223,7 @@ function unshowResponsiveDeadLine(btn) {
     let headDeadline = document.querySelector('#deadLine')
     let showBtn = document.querySelector('.showResponsiveDeadLine')
     headDeadline.classList.add('noShowResponsive')
-    for(let i=0;i< bodyStatus.length; i++){
+    for (let i = 0; i < bodyStatus.length; i++) {
         bodyStatus[i].classList.add('noShowResponsive')
     }
     showBtn.style.display = "inline"
@@ -252,7 +257,7 @@ function changeColors() {
     let title = document.querySelector('.title')
     let previus = document.querySelector('#previus')
     let next = document.querySelector('#next')
-    if (content.style.backgroundColor === 'white' || content.style.backgroundColor==="") {        
+    if (content.style.backgroundColor === 'white' || content.style.backgroundColor === "") {
         root.style.setProperty('--mainYellow', '#68519D')
         root.style.setProperty('--mainPurple', 'black')
         root.style.setProperty('--tableColor', 'white')
@@ -363,8 +368,8 @@ const renderTasks = (tasks) => {
         nothingToShow.style.display = 'block'
     }
     paintStatus()
-    if(isResponsiveDeadline) showResponsiveDeadLine(document.querySelector('.showResponsiveDeadLine'))
-    if(isResponsiveStatus) showResponsiveStatus(document.querySelector('.showResponsiveStatus'))
+    if (isResponsiveDeadline) showResponsiveDeadLine(document.querySelector('.showResponsiveDeadLine'))
+    if (isResponsiveStatus) showResponsiveStatus(document.querySelector('.showResponsiveStatus'))
 }
 function search() {
     page = 1
@@ -395,7 +400,7 @@ function expiresToday() {
     page = 1
     now = new Date()
     let year = now.getFullYear()
-    let month = now.getMonth()+1
+    let month = now.getMonth() + 1
     let day = now.getDate()
     const fullDate = (`${year}-${month}-${day}`)
     filterAtribute = fullDate
@@ -403,72 +408,92 @@ function expiresToday() {
 }
 
 const getDelayedTasks = async () => {
-    if(!isDelayed) page = 1
-    isDelayed = true
-    const apiResponse = await fetch(`https://json-server-vercel-lyart.vercel.app/posts?_sort=${sort}&_order=${order}`)
-    let tasks = await apiResponse.json()
-    const now = new Date()
-    tasks = tasks.filter(function (element) {
-        const deadLineDate = new Date(element.deadLine)
-        if (deadLineDate.getFullYear() < now.getFullYear() && element.status !== 'concluido') return true
-        else if (deadLineDate.getFullYear() === now.getFullYear() && deadLineDate.getMonth() < now.getMonth() && element.status !== 'concluido') return true
-        else if (deadLineDate.getFullYear() === now.getFullYear() && deadLineDate.getMonth() === now.getMonth() && deadLineDate.getDate() + 1 < now.getDate() && element.status !== 'concluido') {
-            return true
-        }
-        else return false
+    let apiResponse = await fetch('https://json-server-vercel-lyart.vercel.app/profile?_sort=id&_order=desc')
+    profile = await apiResponse.json()
+    profile = profile.filter(function (element) {
+        return (element.userName === currentUser.userName && element.password === currentUser.password)
     })
-    tasks = tasks.slice((page-1)*tasksPerPage,page*(tasksPerPage))
-    if (tasks.length === tasksPerPage) {
-        next.disabled = false
+    if (profile.length !== 0) {
+        if (!isDelayed) page = 1
+        isDelayed = true
+        const apiResponse = await fetch(`https://json-server-vercel-lyart.vercel.app/posts?_sort=${sort}&_order=${order}`)
+        let tasks = await apiResponse.json()
+        const now = new Date()
+        tasks = tasks.filter(function (element) {
+            const deadLineDate = new Date(element.deadLine)
+            if (deadLineDate.getFullYear() < now.getFullYear() && element.status !== 'concluido') return true
+            else if (deadLineDate.getFullYear() === now.getFullYear() && deadLineDate.getMonth() < now.getMonth() && element.status !== 'concluido') return true
+            else if (deadLineDate.getFullYear() === now.getFullYear() && deadLineDate.getMonth() === now.getMonth() && deadLineDate.getDate() + 1 < now.getDate() && element.status !== 'concluido') {
+                return true
+            }
+            else return false
+        })
+        tasks = tasks.slice((page - 1) * tasksPerPage, page * (tasksPerPage))
+        if (tasks.length === tasksPerPage) {
+            next.disabled = false
+        }
+        else if (tasks == '') {
+            next.disabled = true
+        }
+        else if (tasks.length < tasksPerPage && tasks.length > 0) {
+            next.disabled = true
+        }
+        renderTasks(tasks)
     }
-    else if (tasks == '') {
-        next.disabled = true
+    else{
+        window.location.reload ()
     }
-    else if (tasks.length < tasksPerPage && tasks.length > 0) {
-        next.disabled = true
-    }
-    renderTasks(tasks)
 }
 
 const getTasks = async () => {
-    isDelayed = false
-    let tasks = ''
-    let link = `https://json-server-vercel-lyart.vercel.app/posts?_page=${page}&_limit=10`
-    if (filterAtribute === 'all') {
-        document.querySelector('.previusNextButtons').style.display = 'block';
-        const apiResponse = await fetch(`${link}&_sort=${sort}&_order=${order}`)
-        tasks = await apiResponse.json()
-    }
-    else if (filterAtribute === 'Em andamento') {
-        document.querySelector('.previusNextButtons').style.display = 'block';
-        const apiResponse = await fetch(`${link}&status=Em andamento&_sort=${sort}&_order=${order}`)
-        tasks = await apiResponse.json()
-    }
-    else if (filterAtribute === 'concluido') {
-        document.querySelector('.previusNextButtons').style.display = 'block';
-        const apiResponse = await fetch(`${link}&status=concluido&_sort=${sort}&_order=${order}`)
-        tasks = await apiResponse.json()
-    }
-    else if (filterAtribute === 'Parada') {
-        document.querySelector('.previusNextButtons').style.display = 'block';
-        const apiResponse = await fetch(`${link}&status=Parada&_sort=${sort}&_order=${order}`)
-        tasks = await apiResponse.json()
+    let apiResponse = await fetch('https://json-server-vercel-lyart.vercel.app/profile?_sort=id&_order=desc')
+    profile = await apiResponse.json()
+    profile = profile.filter(function (element) {
+        return (element.userName === currentUser.userName && element.password === currentUser.password)
+    })
+    if (profile.length !== 0) {
+        isDelayed = false
+        let tasks = ''
+        let link = `https://json-server-vercel-lyart.vercel.app/posts?_page=${page}&_limit=10`
+        if (filterAtribute === 'all') {
+            document.querySelector('.previusNextButtons').style.display = 'block';
+            const apiResponse = await fetch(`${link}&_sort=${sort}&_order=${order}`)
+            tasks = await apiResponse.json()
+        }
+        else if (filterAtribute === 'Em andamento') {
+            document.querySelector('.previusNextButtons').style.display = 'block';
+            const apiResponse = await fetch(`${link}&status=Em andamento&_sort=${sort}&_order=${order}`)
+            tasks = await apiResponse.json()
+        }
+        else if (filterAtribute === 'concluido') {
+            document.querySelector('.previusNextButtons').style.display = 'block';
+            const apiResponse = await fetch(`${link}&status=concluido&_sort=${sort}&_order=${order}`)
+            tasks = await apiResponse.json()
+        }
+        else if (filterAtribute === 'Parada') {
+            document.querySelector('.previusNextButtons').style.display = 'block';
+            const apiResponse = await fetch(`${link}&status=Parada&_sort=${sort}&_order=${order}`)
+            tasks = await apiResponse.json()
+        }
+        else {
+            const apiResponse = await fetch(`https://json-server-vercel-lyart.vercel.app/posts?_sort=${sort}&_order=${order}`)
+            tasks = await apiResponse.json()
+            tasks = tasks.filter(function (element) {
+                deadLine = element.deadLine.split('-')
+                return (element.number === filterAtribute || element.description.toLowerCase().includes(filterAtribute.toString().toLowerCase()) || element.deadLine.includes(filterAtribute) || `${Number(deadLine[0])}-${Number(deadLine[1])}-${Number(deadLine[2])}` === filterAtribute)
+            })
+            tasks = tasks.slice((page - 1) * tasksPerPage, page * (tasksPerPage))
+        }
+        if (tasks.length === tasksPerPage) next.disabled = false
+        else if (tasks.length < tasksPerPage && tasks.length > 0) next.disabled = true
+        else if (tasks == '') next.disabled = true
+        renderTasks(tasks)
     }
     else{
-        const apiResponse = await fetch(`https://json-server-vercel-lyart.vercel.app/posts?_sort=${sort}&_order=${order}`)
-        tasks = await apiResponse.json()
-        tasks = tasks.filter(function (element) {
-            deadLine = element.deadLine.split('-')
-            return (element.number === filterAtribute || element.description.toLowerCase().includes(filterAtribute.toString().toLowerCase()) || element.deadLine.includes(filterAtribute)|| `${Number(deadLine[0])}-${Number(deadLine[1])}-${Number(deadLine[2])}` === filterAtribute)
-        })
-        tasks = tasks.slice((page-1)*tasksPerPage,page*(tasksPerPage))
+        window.location.reload ()
     }
-    if (tasks.length === tasksPerPage) next.disabled = false
-    else if (tasks.length < tasksPerPage && tasks.length > 0) next.disabled = true
-    else if (tasks == '') next.disabled = true
-    renderTasks(tasks)
 }
-    
+
 function ordenateTasks(sortByThis, orderLikeThis) {
     sort = sortByThis
     order = orderLikeThis
