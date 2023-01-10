@@ -11,7 +11,10 @@ let isDelayed = false
 let isAtodayTask = false
 let page = 1
 const tasksPerPage = 10
-currentUser = ''
+let currentUser = {
+    userName: '',
+    password: ''
+}
 
 async function newRegister() {
     let registerModal = document.getElementsByClassName("registerModal")[0]
@@ -46,7 +49,7 @@ const saveNewUser = async (user) => {
         },
         body: JSON.stringify({
             "userName": user.userName,
-            "password": user.password,
+            "password": window.btoa(user.password)
         })
     });
 }
@@ -54,12 +57,10 @@ const register = async (userData) => {
     const apiResponse = await fetch('https://json-server-vercel-lyart.vercel.app/profile?_sort=id&_order=desc')
     profile = await apiResponse.json()
     for (let i = 0; i < profile.length; i++) {
-        if (profile[i].userName === userData.userName && profile[i].password === userData.password) {
+        if (profile[i].userName === userData.userName && window.atob(profile[i].password) === userData.password) {
             registerModal.style.display = 'none';
-            currentUser = {
-                userName: userData.userName,
-                password: userData.password
-            }
+            currentUser.userName = userData.userName
+            currentUser.password = userData.password
             renderPage()
             getTasks()
             return null
@@ -411,7 +412,7 @@ const getDelayedTasks = async () => {
     let apiResponse = await fetch('https://json-server-vercel-lyart.vercel.app/profile?_sort=id&_order=desc')
     profile = await apiResponse.json()
     profile = profile.filter(function (element) {
-        return (element.userName === currentUser.userName && element.password === currentUser.password)
+        return (element.userName === currentUser.userName && window.atob(element.password) === currentUser.password)
     })
     if (profile.length !== 0) {
         if (!isDelayed) page = 1
@@ -449,7 +450,7 @@ const getTasks = async () => {
     let apiResponse = await fetch('https://json-server-vercel-lyart.vercel.app/profile?_sort=id&_order=desc')
     profile = await apiResponse.json()
     profile = profile.filter(function (element) {
-        return (element.userName === currentUser.userName && element.password === currentUser.password)
+        return (element.userName === currentUser.userName && window.atob(element.password) === currentUser.password)
     })
     if (profile.length !== 0) {
         isDelayed = false
