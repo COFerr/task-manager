@@ -314,6 +314,8 @@ const addTask = async (task) => {
     filterAtribute = 'all'
     getTasks()
     closeModal()
+    let title = document.getElementsByClassName("taskRegister")[1]
+    title.innerHTML = "Adicionar tarefa"
 }
 
 if (form) {
@@ -528,6 +530,8 @@ const editTask = async (id) => {
     document.getElementById('descriptionModal').value = task.description
     document.getElementById('deadLineModal').value = task.deadLine
     document.getElementById('statusModal').value = task.status
+    let title = document.getElementsByClassName("taskRegister")[1]
+    title.innerHTML = "Editar tarefa"
     openModal()
 }
 
