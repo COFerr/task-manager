@@ -15,7 +15,6 @@ let currentUser = {
     userName: '',
     password: ''
 }
-
 async function newRegister() {
     let registerModal = document.getElementsByClassName("registerModal")[0]
     const userName = user.elements['userName'].value
@@ -68,7 +67,6 @@ const register = async (userData) => {
     }
     alert('Usuário e/ou senha incorretos')
 }
-
 function renderOptions() {
     let options = document.querySelector('.options')
     options.innerHTML = `
@@ -153,7 +151,6 @@ function renderTable() {
   </tbody>
   `
 }
-
 function renderPreviusNextButtons() {
     let previusNextButtons = document.querySelector(".previusNextButtons")
     previusNextButtons.innerHTML =
@@ -168,7 +165,6 @@ function renderPage() {
     renderTable()
     renderPreviusNextButtons()
 }
-
 if (user) {
     user.addEventListener('submit', (event) => {
         event.preventDefault()
@@ -177,7 +173,6 @@ if (user) {
         register({ userName, password })
     })
 }
-
 function showResponsiveStatus(btn) {
     if (btn === "") btn = document.querySelector(".showResponsiveStatus")
     isResponsiveStatus = true
@@ -191,7 +186,6 @@ function showResponsiveStatus(btn) {
     showBtn.style.display = "inline"
     btn.style.display = "none"
 }
-
 function unshowResponsiveStatus(btn) {
     isResponsiveStatus = false
     let bodyStatus = document.getElementsByClassName('taskStatus')
@@ -204,7 +198,6 @@ function unshowResponsiveStatus(btn) {
     showBtn.style.display = "inline"
     btn.style.display = "none"
 }
-
 function showResponsiveDeadLine(btn) {
     isResponsiveDeadline = true
     if (btn === "") btn = document.querySelector('.showResponsiveDeadLine')
@@ -230,11 +223,9 @@ function unshowResponsiveDeadLine(btn) {
     showBtn.style.display = "inline"
     btn.style.display = "none"
 }
-
 function openModal() {
     modal.style.display = 'block';
 }
-
 function closeModal() {
     modal.style.display = 'none'
     let number = document.getElementById("number")
@@ -248,7 +239,6 @@ function closeModal() {
     let title = document.getElementsByClassName("taskRegister")[1]
     title.innerHTML = "Adicionar nova tarefa"
 }
-
 function changeColors() {
     var root = document.querySelector(':root');
     let content = document.querySelector('.content')
@@ -294,7 +284,6 @@ function changeColors() {
         purpleStripe.style.backgroundColor = 'var(--mainPurple)'
     }
 }
-
 const saveTask = async (task) => {
     await fetch("https://json-server-heroku-production-1551.up.railway.app/posts", {
         method: "POST",
@@ -310,18 +299,15 @@ const saveTask = async (task) => {
         })
     });
 }
-
 const addTask = async (task) => {
     await saveTask(task)
     filterAtribute = 'all'
     getTasks()
     closeModal()
 }
-
 if (form) {
     form.addEventListener('submit', (event) => {
         event.preventDefault()
-
         const number = Number(form.elements['number'].value)
         const description = form.elements['description'].value
         const deadLine = form.elements['deadLine'].value
@@ -330,7 +316,6 @@ if (form) {
         validateForm({ number, description, deadLine, status })
     })
 }
-
 const validateForm = async (task) => {
     const apiResponse = await fetch('https://json-server-heroku-production-1551.up.railway.app/posts?_sort=id&_order=desc')
     tasks = await apiResponse.json()
@@ -344,7 +329,6 @@ const validateForm = async (task) => {
     addTask(task)
     return true;
 }
-
 const renderTasks = (tasks) => {
     const tasksContent = document.getElementById('tasks')
     nothingToShow = document.querySelector('.nothingToShow')
@@ -390,7 +374,6 @@ function selectTasks() {
     else if (selection === 'Hoje') expiresToday()
     else if (selection === 'Atrasadas') getDelayedTasks()
 }
-
 async function choseTasks(filterWord) {
     page = 1
     if (filterWord === 'all') filterAtribute = 'all'
@@ -409,7 +392,6 @@ function expiresToday() {
     filterAtribute = fullDate
     getTasks()
 }
-
 const getDelayedTasks = async () => {
     let apiResponse = await fetch('https://json-server-heroku-production-1551.up.railway.app/profile?_sort=id&_order=desc')
     profile = await apiResponse.json()
@@ -447,7 +429,6 @@ const getDelayedTasks = async () => {
         window.location.reload ()
     }
 }
-
 const getTasks = async () => {
     let apiResponse = await fetch('https://json-server-heroku-production-1551.up.railway.app/profile?_sort=id&_order=desc')
     profile = await apiResponse.json()
@@ -496,7 +477,6 @@ const getTasks = async () => {
         window.location.reload ()
     }
 }
-
 function ordenateTasks(sortByThis, orderLikeThis) {
     sort = sortByThis
     order = orderLikeThis
@@ -508,7 +488,6 @@ function nextPage() {
     if (isDelayed) getDelayedTasks()
     else getTasks()
 }
-
 function previusPage() {
     if (page > 1) {
         page -= 1
@@ -517,13 +496,11 @@ function previusPage() {
         else getTasks()
     }
 }
-
 const getTask = async (id) => {
     const apiResponse = await fetch(`https://json-server-heroku-production-1551.up.railway.app/posts/${id}`)
     const task = await apiResponse.json()
     return task
 }
-
 const editTask = async (id) => {
     task = await getTask(id)
     document.getElementById('number').value = task.number
@@ -534,7 +511,6 @@ const editTask = async (id) => {
     title.innerHTML = "Editar tarefa"
     openModal()
 }
-
 const deleteTask = async (id) => {
     task = await getTask(id)
     if (confirm(`Deseja apagar a tarefa ${task.number}`)) {
@@ -545,7 +521,6 @@ const deleteTask = async (id) => {
         getTasks()
     }
 }
-
 const updateTask = async (id, task) => {
     await fetch(`https://json-server-heroku-production-1551.up.railway.app/posts/${id}`, {
         method: "PUT",
@@ -565,7 +540,6 @@ const updateTask = async (id, task) => {
     getTasks()
     closeModal()
 }
-
 function paintStatus() {
     let status = document.getElementsByClassName('taskStatus')
     for (let i = 0; i < status.length; i++) {
