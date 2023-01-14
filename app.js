@@ -245,6 +245,8 @@ function closeModal() {
     descriptionModal.value = ""
     deadLineModal.value = ""
     statusModal = ""
+    let title = document.getElementsByClassName("taskRegister")[1]
+    title.innerHTML = "Adicionar nova tarefa"
 }
 
 function changeColors() {
@@ -314,8 +316,6 @@ const addTask = async (task) => {
     filterAtribute = 'all'
     getTasks()
     closeModal()
-    let title = document.getElementsByClassName("taskRegister")[1]
-    title.innerHTML = "Adicionar tarefa"
 }
 
 if (form) {
