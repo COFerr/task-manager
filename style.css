@@ -341,7 +341,8 @@ tr{
     background-color: rgba(0,0,0,0.4);
 }
 .taskRegister{
-    margin: 5%;
+    margin-top: 5%;
+    margin-bottom: 5%;
     color: var(--mainPurple);
 }
 
