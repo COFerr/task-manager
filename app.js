@@ -310,9 +310,8 @@ if (form) {
         event.preventDefault()
         const number = Number(form.elements['number'].value)
         const description = form.elements['description'].value
-        const deadLine = form.elements['deadLine'].value
+        const deadLine = new Date(`${form.elements['deadLine'].value}T00:00:00-03:00`).toLocaleDateString('pt-BR')
         const status = form.elements['status'].value
-
         validateForm({ number, description, deadLine, status })
     })
 }
@@ -384,12 +383,8 @@ async function choseTasks(filterWord) {
 }
 function expiresToday() {
     page = 1
-    now = new Date()
-    let year = now.getFullYear()
-    let month = now.getMonth() + 1
-    let day = now.getDate()
-    const fullDate = (`${year}-${month}-${day}`)
-    filterAtribute = fullDate
+    now = new Date().toLocaleDateString('pt-Br')
+    filterAtribute = now
     getTasks()
 }
 const getDelayedTasks = async () => {
@@ -403,12 +398,12 @@ const getDelayedTasks = async () => {
         isDelayed = true
         const apiResponse = await fetch(`https://json-server-heroku-production-1551.up.railway.app/posts?_sort=${sort}&_order=${order}`)
         let tasks = await apiResponse.json()
-        const now = new Date()
+        const now = new Date().toLocaleDateString('pt-BR').split('/')
         tasks = tasks.filter(function (element) {
-            const deadLineDate = new Date(element.deadLine)
-            if (deadLineDate.getFullYear() < now.getFullYear() && element.status !== 'concluido') return true
-            else if (deadLineDate.getFullYear() === now.getFullYear() && deadLineDate.getMonth() < now.getMonth() && element.status !== 'concluido') return true
-            else if (deadLineDate.getFullYear() === now.getFullYear() && deadLineDate.getMonth() === now.getMonth() && deadLineDate.getDate() + 1 < now.getDate() && element.status !== 'concluido') {
+            const deadLineDate = element.deadLine
+            if (deadLineDate.split('/')[2] < now[2] && element.status !== 'concluido') return true
+            else if (deadLineDate.split('/')[2] === now[2] && deadLineDate.split('/')[1]< now[1] && element.status !== 'concluido') return true
+            else if (deadLineDate.split('/')[2] === now[2] && deadLineDate.split('/')[1]=== now[1] && deadLineDate.split('/')[0] < now[0] && element.status !== 'concluido') {
                 return true
             }
             else return false
