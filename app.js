@@ -384,6 +384,7 @@ async function choseTasks(filterWord) {
 function expiresToday() {
     page = 1
     now = new Date().toLocaleDateString('pt-Br')
+    console.log(now)
     filterAtribute = now
     getTasks()
 }
@@ -459,7 +460,7 @@ const getTasks = async () => {
             tasks = await apiResponse.json()
             tasks = tasks.filter(function (element) {
                 deadLine = element.deadLine.split('-')
-                return (element.number === filterAtribute || element.description.toLowerCase().includes(filterAtribute.toString().toLowerCase()) || element.deadLine.includes(filterAtribute) || `${Number(deadLine[0])}-${Number(deadLine[1])}-${Number(deadLine[2])}` === filterAtribute)
+                return (element.number === filterAtribute || element.description.toLowerCase().includes(filterAtribute.toString().toLowerCase()) || element.deadLine.includes(filterAtribute) || `${Number(deadLine[0])}/${Number(deadLine[1])}/${Number(deadLine[2])}` === filterAtribute)
             })
             tasks = tasks.slice((page - 1) * tasksPerPage, page * (tasksPerPage))
         }
