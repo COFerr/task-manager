@@ -265,7 +265,7 @@ table tr:nth-child(2n-1){
 }
 tr{
     font-size: 15px;
-    text-align: center;
+    text-align: left;
     color: var(--mainPurple);
 }
 .th-display{
